@@ -21,8 +21,34 @@ public class OrderTest {
         $("[data-test-id=agreement]").click();
         $("button").click();
         $("[data-test-id=order-success]").shouldHave(exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
+//
+    }
 
-// TODO: 11.06.2022  репозиторий не подключен
-                
+    @Test
+    public void shouldSubmitRequestWithFullName() {
+        $("[data-test-id=name] input").setValue("Иванов Иван");
+        $("[data-test-id=phone] input").setValue("+78956345792");
+        $("[data-test-id=agreement]").click();
+        $("button").click();
+        $("[data-test-id=order-success]").shouldHave(exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
+    }
+
+    @Test
+    public void shouldSubmitFullNameWithHyphen() {
+        $("[data-test-id=name] input").setValue("Иванов-Сидоров Иван");
+        $("[data-test-id=phone] input").setValue("+78956345792");
+        $("[data-test-id=agreement]").click();
+        $("button").click();
+        $("[data-test-id=order-success]").shouldHave(exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
+    }
+    @Test
+    public void shouldSubmitRequestUkrNumber() {
+        $("[data-test-id=name] input").setValue("Иванов-Сидоров Иван");
+        $("[data-test-id=phone] input").setValue("+30666345792");
+        $("[data-test-id=agreement]").click();
+        $("button").click();
+        $("[data-test-id=order-success]").shouldHave(exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
     }
 }
+
+
