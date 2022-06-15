@@ -119,6 +119,22 @@ public class OrderTest {
         $("button").click();
         $("[data-test-id=order-success]").shouldHave(exactText("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время."));
     }
+    @Test
+    public void shouldNotSubmitEmptyFieldName() {
+        $("[data-test-id=name] input").setValue(" ");
+        $("[data-test-id=phone] input").setValue("+70666345792");
+        $("[data-test-id=agreement]").click();
+        $("button").click();
+        $(".input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
+    }
+    @Test
+    public void shouldNotSubmitEmptyFieldPhone() {
+        $("[data-test-id=name] input").setValue("Иванов Иван ");
+        $("[data-test-id=phone] input").setValue(" ");
+        $("[data-test-id=agreement]").click();
+        $("button").click();
+        $(".input_invalid .input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
+    }
 
 
 }
